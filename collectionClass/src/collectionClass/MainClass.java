@@ -8,10 +8,10 @@ public class MainClass {
 	    	DoubleFCFS b=new DoubleFCFS();
 	    	SingleSJF  c=new SingleSJF();
 	    	DoubleSJF  d=new DoubleSJF();
-          	a.InputData();//向文件输入数据   	
-          	b.InputData();//向文件输入数据   	
-          	c.InputData();//向文件输入数据   	
-          	d.InputData();//向文件输入数据   	
+          	a.InputData();//向文件中输入数据   	
+          	b.InputData();//向文件中输入数据   	
+          	c.InputData();//向文件中输入数据   	
+          	d.InputData();//向文件中输入数据   	
 	    	System.out.println("1、先到先服务(单线程)");
 	    	System.out.println("2、先到先服务(双线程)");
 	    	System.out.println("3、短作业优先(单线程)");

@@ -27,7 +27,7 @@ public class SingleSJF extends Task{
         	
     	if(file.exists()){  	
     		try{   			
-    		   FileInputStream in = new FileInputStream(file);//将数据信息从文件中读取出来
+    		   FileInputStream in = new FileInputStream(file);//从文件中读取数据信息
                for(int i=0;i<100;i++){
             	   int a=in.read();
             	   Task_id[i]=a;

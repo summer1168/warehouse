@@ -25,10 +25,10 @@ public class DoubleFCFS extends Task{
     	float weightTurnAround[] ;//带权周转时间=周转时间/服务时间
     	weightTurnAround=new float[100];
     	
-    	if(file.exists()){//判断文件是否存在   	
+    	if(file.exists()){	
     		try{   			
-    		   FileInputStream in = new FileInputStream(file);   //创建FileInputStream对象，将数据信息从文件中读取出来
-               for(int i=0;i<100;i++){//将文件夹里面的数据读取出来
+    		   FileInputStream in = new FileInputStream(file);   //从文件中读取数据信息
+               for(int i=0;i<100;i++){
             	   int a=in.read();
             	   Task_id[i]=a;
             	   int b=in.read();
