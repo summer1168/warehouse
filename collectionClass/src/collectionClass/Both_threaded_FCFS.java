@@ -2,16 +2,12 @@ package collectionClass;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Scanner;
 
 public class Both_threaded_FCFS extends Task{
 	public void Both_threaded_FCFS(){//先到先服务/双线程
-    	File file = new File("task.txt");
+    	//File file = new File("task.txt");
     	
-    	int Task_id[]=new int[100] ;//任务编号
-    	
-    	int []ServerTime=new int[100];//服务时间
-
-    	int []ArrivedTime=new int[100];//到达时间
     	
     	int startingTime[]=new int[100];//开始时间
     	
@@ -21,27 +17,37 @@ public class Both_threaded_FCFS extends Task{
     	
     	float weightTurnAround[]=new float[100] ;//带权周转时间=周转时间/服务时间
     	
-    	if(file.exists()){	
+    	OutputData();
+    	
+    	/*if(file.exists()){	
     		try{   			
     		   FileInputStream in = new FileInputStream(file);   //从文件中读取数据信息
                for(int i=0;i<100;i++){
             	   int a=in.read();
-            	   Task_id[i]=a;         	  
+            	   TaskId[i]=a;         	  
             	   int b=in.read();
-            	   ArrivedTime[i] =b; 	   
+            	   arrived_time[i] =b; 	   
             	   int c=in.read();    	   
-            	   ServerTime[i]=c;           	   
-               }
-               System.out.println("TaskID "+"ArriveTime "+"ServerTime ");
-               for(int i=0;i<100;i++){
-            	   System.out.print("  "+Task_id[i]+"        ");         	  
-            	   System.out.print(ArrivedTime[i]+"          "); 	      	   
-            	   System.out.print(ServerTime[i]);
-            	   System.out.println();
-               }
+            	   server_time[i]=c;           	   
+               }*/
+             
                
                
-               in.close();
+
+    			
+    			File file = new File("input.txt");//创建文件对象	    
+    	    	if(file.exists()){//判断文件是否存在   	
+    	    		try{   			
+    	    		   FileInputStream in = new FileInputStream(file);   //创建FileInputStream对象，将数据信息从文件中读取出来
+    	    		   Scanner scan =new Scanner(in);//用scan读取string信息(遇到空格,换行就自动换)
+    	    		   int i=0;
+    	    		   while(scan.hasNext()){
+    	    			   TaskId[i]=scan.nextInt();
+    	    			   arrived_time[i]=scan.nextInt();
+    	    			   server_time[i]=scan.nextInt();
+    	    			   i=i+1;
+    	    		   }
+    	               scan.close();
                
                int FirstTime=0;//第一线程的时间
                
@@ -51,26 +57,26 @@ public class Both_threaded_FCFS extends Task{
                
                MarkTask=new int[100];
                
-               for(int i=0;i<100;i++){
-            	   if(FirstTime<=ArrivedTime[i]){//第一线程无任务
+               for(i=0;i<100;i++){
+            	   if(FirstTime<=arrived_time[i]){//第一线程无任务
             		   
             		   startingTime[i]=FirstTime;//记录任务的开始时间	
             		   
-            		   FirstTime=ServerTime[i]+ArrivedTime[i];
+            		   FirstTime=server_time[i]+arrived_time[i];
             		   
             		   finishingTime[i]=FirstTime;	
             		   
             		   MarkTask[i]=1;
             		   
-            	   }else if(SecondTime<=ArrivedTime[i]){//第一线程正在工作，而第二线程空闲
+            	   }else if(SecondTime<=arrived_time[i]){//第一线程正在工作，而第二线程空闲
             		   
             		   if(SecondTime==0){
-            			   SecondTime=ArrivedTime[i];
+            			   SecondTime=arrived_time[i];
             		   }
             		   
             		   startingTime[i]=SecondTime;		
             		   
-            		   SecondTime=ServerTime[i]+ArrivedTime[i];   
+            		   SecondTime=server_time[i]+arrived_time[i];   
             		   
             		   finishingTime[i]=SecondTime;
             		   
@@ -79,7 +85,7 @@ public class Both_threaded_FCFS extends Task{
             		   
             		   startingTime[i]=FirstTime;    
             		   
-            		   FirstTime=FirstTime+ServerTime[i]; 
+            		   FirstTime=FirstTime+server_time[i]; 
             		   
             		   finishingTime[i]=FirstTime;
             		   
@@ -88,7 +94,7 @@ public class Both_threaded_FCFS extends Task{
             	   }else{
             		   startingTime[i]=SecondTime;     
             		   
-            		   SecondTime=ServerTime[i]+SecondTime; 	
+            		   SecondTime=server_time[i]+SecondTime; 	
             		   
             		   finishingTime[i]=SecondTime;
             		   
@@ -96,26 +102,21 @@ public class Both_threaded_FCFS extends Task{
             	   }
                }
                /*计算周转时间，带权周转时间*/
-               for(int i=0;i<100;i++){
-            	   turnAroundTime[i]=finishingTime[i]-ArrivedTime[i];   	   
-            	   weightTurnAround[i]=turnAroundTime[i]/ServerTime[i];
+               for(i=0;i<100;i++){
+            	   turnAroundTime[i]=finishingTime[i]-arrived_time[i];   	   
+            	   weightTurnAround[i]=turnAroundTime[i]/server_time[i];
                }
                
-               for(int i=0;i<100;i++){
-            	   if(MarkTask[i]==1){
-            		   System.out.print("第"+(i+1)+"个任务在");
-            		   System.out.print("第一线程进行,开始时间是"+startingTime[i]+",");
-            		   System.out.print("结束时间是"+finishingTime[i]+",");
-            		   System.out.print("周转时间是"+turnAroundTime[i]+",");
-            		   System.out.println("带权周转时间是"+weightTurnAround[i]);            		   
-            	   }else{
-            		   System.out.print("第"+(i+1)+"个任务在");
-            		   System.out.print("第二线程进行,开始时间是"+startingTime[i]+",");
-            		   System.out.print("结束时间是"+finishingTime[i]+",");
-            		   System.out.print("周转时间是"+turnAroundTime[i]+",");
-            		   System.out.println("带权周转时间是"+weightTurnAround[i]);
+               System.out.println("TaskID "+"ArriveTime "+"server_time "+"startingTime "+"finishingTime "+"turnAroundTime "+"weightTurnAround ");
+               for(i=0;i<100;i++){
+            	   System.out.print("  "+TaskId[i]+"        ");         	  
+            	   System.out.print(arrived_time[i]+"          "); 	      	   
+            	   System.out.print(server_time[i]+"           ");
+            	   System.out.print(startingTime[i]+"          ");
+            	   System.out.print(finishingTime[i]+"                  ");
+            	   System.out.print(turnAroundTime[i]+"                 ");
+            	   System.out.println(weightTurnAround[i]);            		   
             	   }
-               }
     		}catch(Exception e){
     			e.printStackTrace();//输出异常信息
     		}

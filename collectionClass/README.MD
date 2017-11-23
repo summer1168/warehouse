@@ -22,14 +22,10 @@ SJF算法首先调度已到达的任务中，服务时间最短的任务，这里不要求实现任务的抢占。
 当有两个处理队列时的情况
 
 ![](https://github.com/summer1168/warehouse/raw/master/collectionClass/img/1.jpg)
-![](https://github.com/summer1168/warehouse/raw/master/collectionClass/img/2.jpg)
 ![](https://github.com/summer1168/warehouse/raw/master/collectionClass/img/3.jpg)
 ![](https://github.com/summer1168/warehouse/raw/master/collectionClass/img/4.jpg)
-![](https://github.com/summer1168/warehouse/raw/master/collectionClass/img/5.jpg)
 ![](https://github.com/summer1168/warehouse/raw/master/collectionClass/img/6.jpg)
-![](https://github.com/summer1168/warehouse/raw/master/collectionClass/img/7.jpg)
-![](https://github.com/summer1168/warehouse/raw/master/collectionClass/img/8.jpg)
+![](https://github.com/summer1168/warehouse/raw/master/collectionClass/img/7.png)
 ![](https://github.com/summer1168/warehouse/raw/master/collectionClass/img/9.jpg)
-![](https://github.com/summer1168/warehouse/raw/master/collectionClass/img/10.jpg)
-![](https://github.com/summer1168/warehouse/raw/master/collectionClass/img/11.jpg)
+![](https://github.com/summer1168/warehouse/raw/master/collectionClass/img/10.png)
 ![](https://github.com/summer1168/warehouse/raw/master/collectionClass/img/12.jpg)

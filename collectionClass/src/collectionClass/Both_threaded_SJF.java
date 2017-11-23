@@ -6,11 +6,6 @@ import java.io.FileInputStream;
 public class Both_threaded_SJF extends Task{
 	public void Both_threaded_SJF(){//短作业优先/双线程
     	File file = new File("task.txt");
-    	int Task_id[]=new int[100] ;//任务编号
-
-    	int []ServerTime=new int[100];//服务时间
-
-    	int []ArrivedTime=new int[100];//到达时间
     	
     	int startingTime[]=new int[100];//开始时间
     	
@@ -19,27 +14,30 @@ public class Both_threaded_SJF extends Task{
     	int turnAroundTime[]=new int[100];//周转时间=完成时间-达到时间
     	
     	float weightTurnAround[]=new float[100] ;//带权周转时间=周转时间/服务时间
-    
-    	if(file.exists()){	
+    	
+    	int r_startingTime[]=new int[100];//开始时间
+       	
+    	   int r_finishingTime[]=new int[100];//完成时间=开始时间+服务时间
+    	
+    	   int r_turnAroundTime[]=new int[100];//周转时间=完成时间-达到时间
+    	
+    	   float r_weightTurnAround[]=new float[100];//带权周转时间=周转时间/服务时间
+    	   
+    	OutputData();
+    	/*if(file.exists()){	
     		try{   			
     		   FileInputStream in = new FileInputStream(file);//从文件中读取数据信息
                for(int i=0;i<100;i++){
             	   int a=in.read();
-            	   Task_id[i]=a;
+            	   TaskId[i]=a;
             	   int b=in.read();
-            	   ArrivedTime[i] =b;
+            	   arrived_time[i] =b;
             	   int c=in.read();            	   
-            	   ServerTime[i]=c;           	   
-               }
-               System.out.println("TaskID "+"ArriveTime "+"ServerTime ");
-               for(int i=0;i<100;i++){
-            	   System.out.print("  "+Task_id[i]+"        ");         	  
-            	   System.out.print(ArrivedTime[i]+"          "); 	      	   
-            	   System.out.print(ServerTime[i]);
-            	   System.out.println();
-               }
+            	   server_time[i]=c;           	   
+               }*/
+            
                
-               in.close();
+
 	           int FirstTime=0;//第一线程的时间
 	           
 	           int SecondTime=0;//第二线程的时间
@@ -62,86 +60,104 @@ public class Both_threaded_SJF extends Task{
 	    			   if(ID[k]==true) {//2 时间1的时候任务2已经到达 这时线程1处于忙碌状态
 	    				   continue;
 	    			   }
-	    			   if(ServerTime[ready_id]>ServerTime[k]) {
+	    			   if(server_time[ready_id]>server_time[k]) {
 	    				   ready_id=k;
 	    			   }
 	    		   }
-            	   if(FirstTime<=ArrivedTime[ready_id]){//第一线程空闲
+            	   if(FirstTime<=arrived_time[ready_id]){//第一线程空闲
             		   startingTime[ready_id]=FirstTime;
             		   
-            		   FirstTime=ArrivedTime[ready_id]+ServerTime[ready_id];
+            		   FirstTime=arrived_time[ready_id]+server_time[ready_id];
             		   
             		   finishingTime[ready_id]=FirstTime;
             		   
-            		   turnAroundTime[ready_id]=finishingTime[ready_id]-ArrivedTime[ready_id];
+            		   turnAroundTime[ready_id]=finishingTime[ready_id]-arrived_time[ready_id];
             		   
-            		   weightTurnAround[ready_id]=turnAroundTime[ready_id]/ServerTime[ready_id];   
+            		   weightTurnAround[ready_id]=turnAroundTime[ready_id]/server_time[ready_id]; 
             		   		   
-            		   System.out.print("第"+(ready_id+1)+"个任务在第一线程中进行，开始时间是");
+            		   r_startingTime[ready_id]=startingTime[ready_id];
             		   
-            		   System.out.print(startingTime[ready_id]+",结束时间是"+finishingTime[ready_id]+",");
+            		   r_finishingTime[ready_id]=finishingTime[ready_id];
             		   
-            		   System.out.print("周转时间"+turnAroundTime[ready_id]+",");
+            		   r_turnAroundTime[ready_id]=turnAroundTime[ready_id];
             		   
-            		   System.out.println("带权周转时间是"+weightTurnAround[ready_id]);
-            	   }else if(SecondTime<=ArrivedTime[ready_id]){//第一线程正在运行任务，第二线程空闲
+            		   r_weightTurnAround[ready_id]=weightTurnAround[ready_id];
+            	   }else if(SecondTime<=arrived_time[ready_id]){//第一线程正在运行任务，第二线程空闲
             		   
             		   if(SecondTime==0){
-            			   SecondTime=ArrivedTime[ready_id];
+            			   SecondTime=arrived_time[ready_id];
             		   }
             		   
             		   startingTime[ready_id]=SecondTime;
             		   
-            		   SecondTime=ArrivedTime[ready_id]+ServerTime[ready_id];
+            		   SecondTime=arrived_time[ready_id]+server_time[ready_id];
             		   
             		   finishingTime[ready_id]=SecondTime;
             		   
-            		   turnAroundTime[ready_id]=finishingTime[ready_id]-ArrivedTime[ready_id];
+            		   turnAroundTime[ready_id]=finishingTime[ready_id]-arrived_time[ready_id];
             		   
-            		   weightTurnAround[ready_id]=turnAroundTime[ready_id]/ServerTime[ready_id];   
+            		   weightTurnAround[ready_id]=turnAroundTime[ready_id]/server_time[ready_id];   
             		   
-            		   System.out.print("第"+(ready_id+1)+"个任务在第二线程中进行，开始时间是");
-            		   System.out.print(startingTime[ready_id]+",结束时间是"+finishingTime[ready_id]+",");
-            		   System.out.print("周转时间"+turnAroundTime[ready_id]+",");
-            		   System.out.println("带权周转时间是"+weightTurnAround[ready_id]);
+                       r_startingTime[ready_id]=startingTime[ready_id];
+            		   
+            		   r_finishingTime[ready_id]=finishingTime[ready_id];
+            		   
+            		   r_turnAroundTime[ready_id]=turnAroundTime[ready_id];
+            		   
+            		   r_weightTurnAround[ready_id]=weightTurnAround[ready_id];
             	   }else if(FirstTime<=SecondTime){//第一线程比第二线程提前空闲
             		   startingTime[ready_id]=FirstTime;
             		   
-            		   FirstTime=FirstTime+ServerTime[ready_id];
+            		   FirstTime=FirstTime+server_time[ready_id];
             		   
             		   finishingTime[ready_id]=FirstTime;
             		   
-            		   turnAroundTime[ready_id]=finishingTime[ready_id]-ArrivedTime[ready_id];
+            		   turnAroundTime[ready_id]=finishingTime[ready_id]-arrived_time[ready_id];
             		   
-            		   weightTurnAround[ready_id]=turnAroundTime[ready_id]/ServerTime[ready_id];   
+            		   weightTurnAround[ready_id]=turnAroundTime[ready_id]/server_time[ready_id];   
             		   
-            		   System.out.print("第"+(ready_id+1)+"个任务在第一线程中进行，开始时间是");
-            		   System.out.print(startingTime[ready_id]+",结束时间是"+finishingTime[ready_id]+",");
-            		   System.out.print("周转时间"+turnAroundTime[ready_id]+",");
-            		   System.out.println("带权周转时间是"+weightTurnAround[ready_id]);
+                       r_startingTime[ready_id]=startingTime[ready_id];
+            		   
+            		   r_finishingTime[ready_id]=finishingTime[ready_id];
+            		   
+            		   r_turnAroundTime[ready_id]=turnAroundTime[ready_id];
+            		   
+            		   r_weightTurnAround[ready_id]=weightTurnAround[ready_id];
 
             	   }else{
             		   startingTime[ready_id]=SecondTime;
             		   
-            		   SecondTime=SecondTime+ServerTime[ready_id];
+            		   SecondTime=SecondTime+server_time[ready_id];
             		   
             		   finishingTime[ready_id]=SecondTime;
             		   
-            		   turnAroundTime[ready_id]=finishingTime[ready_id]-ArrivedTime[ready_id];
+            		   turnAroundTime[ready_id]=finishingTime[ready_id]-arrived_time[ready_id];
             		   
-            		   weightTurnAround[ready_id]=turnAroundTime[ready_id]/ServerTime[ready_id];  
+            		   weightTurnAround[ready_id]=turnAroundTime[ready_id]/server_time[ready_id];  
             		   
-            		   System.out.print("第"+(ready_id+1)+"个任务在第二线程中进行，开始时间是");
-            		   System.out.print(startingTime[ready_id]+",结束时间是"+finishingTime[ready_id]+",");
-            		   System.out.print("周转时间"+turnAroundTime[ready_id]+",");
-            		   System.out.println("带权周转时间是"+weightTurnAround[ready_id]);
+                       r_startingTime[ready_id]=startingTime[ready_id];
+            		   
+            		   r_finishingTime[ready_id]=finishingTime[ready_id];
+            		   
+            		   r_turnAroundTime[ready_id]=turnAroundTime[ready_id];
+            		   
+            		   r_weightTurnAround[ready_id]=weightTurnAround[ready_id];
             	   }
             	   ID[ready_id]=true;//将该任务已经完成
                }
-
-    		}catch(Exception e){
-    			e.printStackTrace();//输出异常信息
+               
+               
+               System.out.println("TaskID "+"ArriveTime "+"server_time "+"startingTime "+"finishingTime "+"turnAroundTime "+"weightTurnAround ");
+               for(int i=0;i<100;i++){
+            	   System.out.print("  "+TaskId[i]+"        ");         	  
+            	   System.out.print(arrived_time[i]+"          "); 	      	   
+            	   System.out.print(server_time[i]+"             ");
+            	   System.out.print(r_startingTime[i]+"          ");
+            	   System.out.print(r_finishingTime[i]+"              ");
+            	   System.out.print(r_turnAroundTime[i]+"          ");
+            	   System.out.print(r_weightTurnAround[i]+"          ");
+            	   System.out.println();
+               }   
     		}
-    	}
     }
-}
+

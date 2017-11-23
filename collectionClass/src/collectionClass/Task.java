@@ -1,14 +1,16 @@
 package collectionClass;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Task {
-	private int TaskId[];//任务编号
-	private int arrived_time[];//到达时间
-	private int server_time[];//服务时间
+	protected int TaskId[];//任务编号
+	protected int arrived_time[];//到达时间
+	protected int server_time[];//服务时间
 	
 	public Task(){
 		TaskId= new int[100];
@@ -42,5 +44,26 @@ public class Task {
     		}
     	}
     }
+	public void OutputData(){	
+		File file = new File("input.txt");//创建文件对象	    
+    	if(file.exists()){//判断文件是否存在   	
+    		try{   			
+    		   FileInputStream in = new FileInputStream(file);   //创建FileInputStream对象，将数据信息从文件中读取出来
+    		   Scanner scan =new Scanner(in);//用scan读取string信息(遇到空格,换行就自动换)
+    		   int i=0;
+    		   while(scan.hasNext()){
+    			   TaskId[i]=scan.nextInt();
+    			   arrived_time[i]=scan.nextInt();
+    			   server_time[i]=scan.nextInt();
+    			   i=i+1;
+    		   }
+               scan.close();
+	}catch(Exception e){
+		e.printStackTrace();//输出异常信息
+	}
+
+    	}
+	}
+	
 }
 
