@@ -8,8 +8,8 @@
 
 打印每段求和结果，以及最后的总结果。即分别打印第一段求和结果，第二段求和结果，第三段求和结果，第四段求和结果，最终的求和结果
 
-![](https://github.com/summer1168/warehouse/raw/master/lab5/Sum_1-100/2-1.png)
-![](https://github.com/summer1168/warehouse/raw/master/lab5/Sum_1-100/2-2.png)
+![](https://github.com/summer1168/warehouse/raw/master/Sum_1-100/img/2-1.png)
+![](https://github.com/summer1168/warehouse/raw/master/Sum_1-100/img/2-2.png)
 
 
 
