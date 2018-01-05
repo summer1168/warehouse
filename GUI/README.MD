@@ -12,9 +12,9 @@
 
 服务器接收客户端的数据前面会有“客户机：”
 
-![](https://github.com/summer1168/warehouse/raw/master/GUI/img/1.png)
-![](https://github.com/summer1168/warehouse/raw/master/GUI/img/2.png)
-![](https://github.com/summer1168/warehouse/raw/master/GUI/img/3.png)
+![](https://github.com/summer1168/warehouse/raw/master/GUI/img/1.jpg)
+![](https://github.com/summer1168/warehouse/raw/master/GUI/img/2.jpg)
+![](https://github.com/summer1168/warehouse/raw/master/GUI/img/3.jpg)
 
 
 
